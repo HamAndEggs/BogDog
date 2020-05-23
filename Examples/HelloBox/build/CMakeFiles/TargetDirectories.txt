@@ -1,0 +1,1 @@
+/home/richard/MyProjects/RPi/BogDog/HelloBox/build/CMakeFiles/HelloBox.dir

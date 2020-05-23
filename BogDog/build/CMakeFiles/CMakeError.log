@@ -1,0 +1,48 @@
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: CMAKE_C_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: 
+
+The output was:
+No such file or directory
+
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: CMAKE_C_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: -c
+
+The output was:
+No such file or directory
+
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: CMAKE_C_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: -Aa
+
+The output was:
+No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: ../../broadcom/tools/arm-bcm2708/arm-bcm2708hardfp-linux-gnueabi/arm-bcm2708hardfp-linux-gnueabi/bin/gcc 
+Build flags: 
+Id flags: 
+
+The output was:
+No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: ../../broadcom/tools/arm-bcm2708/arm-bcm2708hardfp-linux-gnueabi/arm-bcm2708hardfp-linux-gnueabi/bin/gcc 
+Build flags: 
+Id flags: -c
+
+The output was:
+No such file or directory
+
+
+Determining if the CXX compiler works failed with the following output:
+
+
