@@ -1,1 +1,0 @@
-/usr/bin/c++       CMakeFiles/HelloBox.dir/home/richard/MyProjects/RPi/BogDog/HelloBox/main.cpp.o  -o HelloBox -rdynamic -L../../BogDog/build -lbogdog -lglut -Wl,-rpath,../../BogDog/build 
