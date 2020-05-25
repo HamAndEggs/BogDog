@@ -1,13 +1,11 @@
 {
     "configurations": {
-        "default": {
-            "default": false,
+        "rpi4": {
+            "default": true,
             "target": "executable",
             "compiler": "gcc",
             "linker": "gcc",
             "archiver": "ar",
-            "output_path": "./bin/debug/",
-            "output_name": "BogDog",
             "standard": "c++14",
             "optimisation": "0",
             "debug_level": "2",
@@ -29,6 +27,41 @@
                 "DEBUG_BUILD",
                 "TARGET_GLES",
                 "PLATFORM_MESA"
+            ]
+        },
+        "rpi3": {
+            "default": false,
+            "target": "executable",
+            "compiler": "gcc",
+            "linker": "gcc",
+            "archiver": "ar",
+            "standard": "c++14",
+            "optimisation": "0",
+            "debug_level": "2",
+            "warnings_as_errors": false,
+            "enable_all_warnings": false,
+            "fatal_errors": false,
+            "include": [
+                "/usr/include/",
+                "./source/",
+                "/opt/vc/include/"
+            ],
+            "libs": [
+                "stdc++",
+                "pthread",
+                "m",
+                "GLESv2",
+                "EGL",
+                "bcm_host"
+            ],
+            "libpaths":
+            [
+                "/opt/vc/lib"
+            ],
+            "define": [
+                "DEBUG_BUILD",
+                "TARGET_GLES",
+                "PLATFORM_RPI_VC4_GLES"
             ]
         }
     },

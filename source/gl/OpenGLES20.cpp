@@ -491,7 +491,7 @@ bool OpenGLES_2_0::OpenGLES(bool syncWithDisplay)
 	m_native_window = 0;
 #endif
 
-	m_surface = eglCreateWindowSurface(m_display,m_config,m_native_window,0);
+	m_surface = eglCreateWindowSurface(m_display,m_config,(EGLNativeWindowType)&m_native_window,0);
 
 	if( m_surface == EGL_NO_SURFACE )
 	{
