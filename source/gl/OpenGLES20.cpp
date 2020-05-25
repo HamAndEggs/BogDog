@@ -77,7 +77,7 @@ static void ExitApplication()
 	applicationRunning = false;
 }
 
-#ifdef PLATFORM_RPI
+#ifdef PLATFORM_RPI_VC4_GLES
 static void RPI_Exit(int)
 {
 	ExitApplication();
@@ -86,7 +86,7 @@ static void RPI_Exit(int)
 
 OpenGLES_2_0::OpenGLES_2_0()
 {
-#ifdef PLATFORM_RPI
+#ifdef PLATFORM_RPI_VC4_GLES
 	struct sigaction act;
 	act.sa_handler = RPI_Exit;
 	sigemptyset(&act.sa_mask);
@@ -126,7 +126,7 @@ bool OpenGLES_2_0::ApplicationRunning()
 
 bool OpenGLES_2_0::Create(bool syncWithDisplay)
 {
-#ifdef PLATFORM_RPI
+#ifdef PLATFORM_RPI_VC4_GLES
 	bcm_host_init();
 #endif
 
@@ -448,6 +448,7 @@ bool OpenGLES_2_0::OpenGLES(bool syncWithDisplay)
 		return false;
 	}
 
+#ifdef PLATFORM_RPI_VC4_GLES
 	VC_RECT_T dst_rect;
 	VC_RECT_T src_rect;
 	VC_DISPMANX_ALPHA_T alpha;
@@ -484,8 +485,13 @@ bool OpenGLES_2_0::OpenGLES(bool syncWithDisplay)
 	m_native_window.width = m_info.width;
 	m_native_window.height = m_info.height;
 	vc_dispmanx_update_submit_sync( dispman_update );
+#endif //PLATFORM_RPI_VC4_GLES
 
-	m_surface = eglCreateWindowSurface(m_display,m_config,&m_native_window,0);
+#ifdef PLATFORM_MESA
+	m_native_window = 0;
+#endif
+
+	m_surface = eglCreateWindowSurface(m_display,m_config,m_native_window,0);
 
 	if( m_surface == EGL_NO_SURFACE )
 	{
@@ -511,8 +517,6 @@ bool OpenGLES_2_0::OpenGLES(bool syncWithDisplay)
 	}
 
 	m_info.display_aspect = (float)m_info.width / (float)m_info.height;
-
-	printf("GLES 2.0 Running m_display(0x%08x) m_surface(0x%08x)\n",(int)m_display,(int)m_surface);
 
 	return true;
 #endif //#ifdef TARGET_GLES

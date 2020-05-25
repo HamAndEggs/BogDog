@@ -181,8 +181,12 @@ private:
     EGLint m_major_version,m_minor_version;		//!<Version number of OpenGLES we are running on.
 #endif
 
-#ifdef PLATFORM_RPI
+#ifdef PLATFORM_RPI_VC4_GLES
     EGL_DISPMANX_WINDOW_T m_native_window;			//!<The RPi window object needed to create the render surface.
+#endif
+
+#ifdef PLATFORM_MESA // sudo apt install libgles2-mesa-dev
+	EGLNativeWindowType m_native_window;
 #endif
 
 	struct

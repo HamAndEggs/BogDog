@@ -13,7 +13,7 @@
 	#include "EGL/egl.h"
 #endif
 
-#ifdef PLATFORM_RPI
+#ifdef PLATFORM_RPI_VC4_GLES
 	#include "bcm_host.h"
 #endif
 

@@ -23,7 +23,7 @@
 
 namespace BogDog
 {
-const char* vertexShader = ""	\
+static const char* vertexShader = ""	\
 "uniform mat4 u_proj_cam;\n"	\
 "uniform mat4 u_trans;\n"	\
 "uniform vec4 u_global_colour;\n" \
@@ -36,7 +36,7 @@ const char* vertexShader = ""	\
 "	gl_Position = u_proj_cam * (u_trans * a_xyz);\n"	\
 "}\n";
 
-const char *pixelShader = ""	\
+static const char *pixelShader = ""	\
 "varying vec4 v_col;\n"	\
 "void main(void)\n"	\
 "{\n"	\

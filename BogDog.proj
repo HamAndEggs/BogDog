@@ -20,10 +20,15 @@
             ],
             "libs": [
                 "stdc++",
-                "pthread"
+                "pthread",
+                "m",
+                "GLESv2",
+                "EGL"
             ],
             "define": [
-                "DEBUG_BUILD"
+                "DEBUG_BUILD",
+                "TARGET_GLES",
+                "PLATFORM_MESA"
             ]
         }
     },
@@ -47,6 +52,7 @@
         "source/maths/Quaternion.cpp",
         "source/maths/SinCos.cpp",
         "source/maths/Vector2.cpp",
-        "source/maths/Vector3.cpp"
+        "source/maths/Vector3.cpp",
+        "Examples/HelloBox/main.cpp"
     ]
 }
