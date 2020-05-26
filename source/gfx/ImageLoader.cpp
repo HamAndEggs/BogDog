@@ -9,6 +9,7 @@
 #include "gfx/ImageLoader.h"
 #include "InFile.h"
 #include "Common.h"
+#include <iostream>
 
 namespace BogDog
 {
@@ -16,6 +17,7 @@ namespace BogDog
 ImageLoader::ImageLoader()
 {
 	buffer = NULL;
+	bufferSize = 0;
 
 }
 
@@ -94,6 +96,10 @@ typedef struct TGAHeader
 
 void ImageLoader::LoadTGA(const uint8_t *fileData,bool p16Bit_texture)
 {
+	assert( fileData );
+
+	std::cout << "Loading TGA" << std::endl;
+
 	// read in the TGA header
 	const TGAHeader *header = (const TGAHeader*)fileData;
 
@@ -109,16 +115,22 @@ void ImageLoader::LoadTGA(const uint8_t *fileData,bool p16Bit_texture)
 
 	// not supporting compressed images (yet)
 	if(rle_compressed || huf_compressed)
+	{
+		std::cout << "not supporting compressed images" << std::endl;
 		return;
+	}
 
 	// determine the target format to load the image as
 	loadedImage.textureFormat = TEX_INVALID;
 	loadedImage.width = header->width;
 	loadedImage.height = header->height;
 
+	std::cout << "Image " << header->width << "x" << header->height << std::endl;
+
 	switch(tga_type&0x07)
 	{
 	case 0x01:	// indexed image
+		std::cout << "indexed image not supported" << std::endl;
 		return;	// unsupported (currently)
 		break;
 
@@ -158,6 +170,7 @@ void ImageLoader::LoadTGA(const uint8_t *fileData,bool p16Bit_texture)
 
 	case 0x00:	// no image data in file
 	default:	// unsupported
+		std::cout << "no image data in file, not supported" << std::endl;
 		return;
 	}
 
@@ -172,6 +185,8 @@ void ImageLoader::LoadTGA(const uint8_t *fileData,bool p16Bit_texture)
 		y_step = -1;
 		y = header->height;
 	}
+
+	std::cout << "target_byte_size " << target_byte_size << std::endl;
 
 	// initialise the target image buffer
 	uint8_t* target_pixel_data = getBuffer(header->width, header->height,target_byte_size);

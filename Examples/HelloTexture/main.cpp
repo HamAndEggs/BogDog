@@ -20,7 +20,7 @@
  */
 
 
-#include <stdio.h>
+#include <iostream>
 #include "BogDog.h"
 
 /*
@@ -57,15 +57,16 @@ const GLint LoadTexture(BogDog::OpenGLES_2_0 &gl)
 {
 	GLint tex = 0;
 	BogDog::ImageLoader loader;
-	const BogDog::LoadedImage& image = loader.Load("./data/textures/test256.tga");
+	const BogDog::LoadedImage& image = loader.Load("./Examples/data/textures/test256.tga");
 	if( image.image != NULL )
 	{
+	  std::cout << "Texture loaded " << tex << std::endl;
 	  tex = gl.CreateTexture(image,false,true,true);
-	  printf("Texture loaded %d\n",tex);
+	  std::cout << "Texture created " << tex << std::endl;
 	}
 	else
 	{
-	  printf("Texture load failed!\n");
+	  std::cout << "Texture load failed!" << std::endl;
 	}
 	loader.FreeupMemory();
 	return tex;
@@ -76,7 +77,7 @@ const GLint LoadTexture(BogDog::OpenGLES_2_0 &gl)
  */
 int main(void)
 {
-  printf("\n**************** Starting app ****************\n");
+  std::cout << "**************** Starting app ****************" << std::endl;
   BogDog::OpenGLES_2_0 gl;
   if(gl.Create(false) == false )
   {
@@ -131,7 +132,7 @@ int main(void)
 	  gl.Update();
   };
 
-  printf("Application exiting\n");
+  std::cout << "Application exiting" << std::endl;
 
   delete colourShader;
 

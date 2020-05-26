@@ -86,6 +86,6 @@
         "source/maths/SinCos.cpp",
         "source/maths/Vector2.cpp",
         "source/maths/Vector3.cpp",
-        "Examples/HelloBox/main.cpp"
+        "Examples/HelloTexture/main.cpp"
     ]
 }
