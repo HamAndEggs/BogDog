@@ -77,7 +77,7 @@ static void ExitApplication()
 	applicationRunning = false;
 }
 
-#ifdef PLATFORM_RPI_VC4_GLES
+#ifdef PLATFORM_BCM_HOST
 static void RPI_Exit(int)
 {
 	ExitApplication();
@@ -86,7 +86,7 @@ static void RPI_Exit(int)
 
 OpenGLES_2_0::OpenGLES_2_0()
 {
-#ifdef PLATFORM_RPI_VC4_GLES
+#ifdef PLATFORM_BCM_HOST
 	struct sigaction act;
 	act.sa_handler = RPI_Exit;
 	sigemptyset(&act.sa_mask);
@@ -126,7 +126,7 @@ bool OpenGLES_2_0::ApplicationRunning()
 
 bool OpenGLES_2_0::Create(bool syncWithDisplay)
 {
-#ifdef PLATFORM_RPI_VC4_GLES
+#ifdef PLATFORM_BCM_HOST
 	bcm_host_init();
 #endif
 
@@ -448,7 +448,7 @@ bool OpenGLES_2_0::OpenGLES(bool syncWithDisplay)
 		return false;
 	}
 
-#ifdef PLATFORM_RPI_VC4_GLES
+#ifdef PLATFORM_BCM_HOST
 	VC_RECT_T dst_rect;
 	VC_RECT_T src_rect;
 	VC_DISPMANX_ALPHA_T alpha;
@@ -485,7 +485,7 @@ bool OpenGLES_2_0::OpenGLES(bool syncWithDisplay)
 	m_native_window.width = m_info.width;
 	m_native_window.height = m_info.height;
 	vc_dispmanx_update_submit_sync( dispman_update );
-#endif //PLATFORM_RPI_VC4_GLES
+#endif //PLATFORM_BCM_HOST
 
 #ifdef PLATFORM_MESA
 	m_native_window = 0;

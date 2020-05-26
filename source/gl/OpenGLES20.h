@@ -181,7 +181,7 @@ private:
     EGLint m_major_version,m_minor_version;		//!<Version number of OpenGLES we are running on.
 #endif
 
-#ifdef PLATFORM_RPI_VC4_GLES
+#ifdef PLATFORM_BCM_HOST
     EGL_DISPMANX_WINDOW_T m_native_window;			//!<The RPi window object needed to create the render surface.
 #endif
 

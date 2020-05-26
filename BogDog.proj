@@ -1,6 +1,6 @@
 {
     "configurations": {
-        "rpi4": {
+        "mesa-GLES": {
             "default": true,
             "target": "executable",
             "compiler": "gcc",
@@ -29,7 +29,7 @@
                 "PLATFORM_MESA"
             ]
         },
-        "rpi3": {
+        "bcm_host-GLES": {
             "default": false,
             "target": "executable",
             "compiler": "gcc",
@@ -61,7 +61,7 @@
             "define": [
                 "DEBUG_BUILD",
                 "TARGET_GLES",
-                "PLATFORM_RPI_VC4_GLES"
+                "PLATFORM_BCM_HOST"
             ]
         }
     },
