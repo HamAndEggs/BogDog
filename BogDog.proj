@@ -51,8 +51,8 @@
                 "stdc++fs",
                 "pthread",
                 "m",
-                "GLESv2",
-                "EGL",
+                "brcmGLESv2",
+                "brcmEGL",
                 "bcm_host"
             ],
             "libpaths":
