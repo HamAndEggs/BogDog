@@ -20,10 +20,16 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+
 #include <unistd.h>
 #include <sys/time.h>
 #include <assert.h>
 #include <signal.h>
+#include <iostream>
 
 #include "gl/OpenGLES20.h"
 #include "Common.h"
@@ -414,14 +420,40 @@ bool OpenGLES_2_0::OpenGLES(bool syncWithDisplay)
 {
 #ifdef TARGET_GLES
 
-	m_display = eglGetDisplay(EGL_DEFAULT_DISPLAY);
+	struct gbm_device *gbm = NULL;
 
-	if( !m_display )
+	int fd = open("/dev/dri/card0", O_RDWR | FD_CLOEXEC);
+	if (fd < 0)
 	{
-		printf("Error: Couldn\'t open the EGL default display\n");
+		std::cout << "failed toopen display /dev/dri/card0" << std::endl;
 		return false;
 	}
 
+	gbm = gbm_create_device(fd);
+	if (!gbm)
+	{
+		std::cout << "gbm_create_device failed" << std::endl;
+		return false;
+	}
+
+//	m_display = eglGetPlatformDisplayEXT(EGL_PLATFORM_GBM_MESA, gbm, NULL);
+
+	m_display = eglGetDisplay((NativeDisplayType)gbm);
+
+	if (m_display == EGL_NO_DISPLAY)
+	{
+		std::cout << "eglGetPlatformDisplayEXT failed" << std::endl;
+		return false;
+	}
+
+/*	m_display = eglGetDisplay(EGL_DEFAULT_DISPLAY);
+
+	if( m_display == EGL_NO_DISPLAY )
+	{
+		std::cout << "Error: Couldn\'t open the EGL default display" << std::endl;
+		return false;
+	}
+*/
 	//Now we have a display lets initialize it.
 	if( !eglInitialize(m_display, &m_major_version, &m_minor_version) )
 	{
@@ -436,6 +468,7 @@ bool OpenGLES_2_0::OpenGLES(bool syncWithDisplay)
 		return false;
 	}
 
+	std::cout << "Binding api EGL_OPENGL_ES_API" << std::endl;
 	eglBindAPI(EGL_OPENGL_ES_API);
 
 
@@ -444,9 +477,11 @@ bool OpenGLES_2_0::OpenGLES(bool syncWithDisplay)
 	m_context = eglCreateContext(m_display,m_config,EGL_NO_CONTEXT,ai32ContextAttribs);
 	if( !m_context )
 	{
-		printf("Error: Failed to get a rendering context.\n");
+		std::cout << "Error: Failed to get a rendering context" << std::endl;
 		return false;
 	}
+
+	std::cout << "Got a rendering context" << std::endl;
 
 #ifdef PLATFORM_BCM_HOST
 	VC_RECT_T dst_rect;
@@ -556,6 +591,7 @@ bool OpenGLES_2_0::GetGLConfig()
 			EGL_BLUE_SIZE,			8,
 			EGL_ALPHA_SIZE,			8,
 			EGL_DEPTH_SIZE,			depths_32_to_16[c],
+			EGL_CONFORMANT,			EGL_OPENGL_ES2_BIT,
 			EGL_RENDERABLE_TYPE,	EGL_OPENGL_ES2_BIT,
 			EGL_NONE,				EGL_NONE
 		};

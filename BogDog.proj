@@ -1,7 +1,7 @@
 {
     "configurations": {
         "mesa-GLES": {
-            "default": false,
+            "default": true,
             "target": "executable",
             "compiler": "gcc",
             "linker": "gcc",
@@ -21,7 +21,11 @@
                 "pthread",
                 "m",
                 "GLESv2",
-                "EGL"
+                "EGL",
+                "gbm"
+            ],
+            "libpaths":[
+             "/usr/lib"
             ],
             "define": [
                 "DEBUG_BUILD",
@@ -30,7 +34,7 @@
             ]
         },
         "bcm_host-GLES": {
-            "default": true,
+            "default": false,
             "target": "executable",
             "compiler": "gcc",
             "linker": "gcc",

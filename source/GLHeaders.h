@@ -11,6 +11,7 @@
 #ifdef TARGET_GLES
 	#include "GLES2/gl2.h"
 	#include "EGL/egl.h"
+	#include <gbm.h> //sudo apt install libgbm-dev
 #endif
 
 #ifdef PLATFORM_BCM_HOST
